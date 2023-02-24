@@ -1,7 +1,11 @@
-from haystack.nodes import FARMReader
-model = "deepset/roberta-base-squad2"
-reader = FARMReader(model, use_gpu=True)
-
-reader.train( data_dir='./data', train_filename="dev-v2.0.json", use_gpu=True, n_epochs=1, save_dir="my_model" )
-
-reader.save('roberta_base_squad2')
+from haystack.nodes import FARMReader 
+# Initialise Reader 
+model = "deepset/roberta-base-squad2" 
+reader = FARMReader(model) 
+# Perform fine-tuning 
+train_data = "./" 
+train_filename = "train.json" 
+save_dir = "finetuned_model" 
+reader.train(train_data, train_filename, save_dir=save_dir) 
+# Load 
+finetuned_reader = FARMReader(save_dir)
